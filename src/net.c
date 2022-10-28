@@ -1,7 +1,8 @@
-#include "net.h"
 #include "dns.h"
 #include "fmt.h"
+#include "http.h"
 #include "log.h"
+#include "net.h"
 #include "timer.h"
 #include "tls.h"
 
