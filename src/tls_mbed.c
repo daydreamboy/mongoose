@@ -12,16 +12,16 @@
 
 void mg_tls_free(struct mg_connection *c) {
   struct mg_tls *tls = (struct mg_tls *) c->tls;
-  if (tls != NULL) {
-    free(tls->cafile);
-    mbedtls_ssl_free(&tls->ssl);
-    mbedtls_pk_free(&tls->pk);
-    mbedtls_x509_crt_free(&tls->ca);
-    mbedtls_x509_crt_free(&tls->cert);
-    mbedtls_ssl_config_free(&tls->conf);
-    free(tls);
-    c->tls = NULL;
-  }
+  if (tls == NULL) return;
+  free(tls->cafile);
+  mbedtls_ssl_free(&tls->ssl);
+  mbedtls_pk_free(&tls->pk);
+  mbedtls_x509_crt_free(&tls->ca);
+  mbedtls_x509_crt_free(&tls->cert);
+  mbedtls_ssl_config_free(&tls->conf);
+  free(tls);
+  c->tls = NULL;
+  c->is_tls = c->is_tls_hs = 0;
 }
 
 static int mg_net_send(void *ctx, const unsigned char *buf, size_t len) {

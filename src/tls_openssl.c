@@ -132,6 +132,7 @@ void mg_tls_free(struct mg_connection *c) {
   SSL_CTX_free(tls->ctx);
   free(tls);
   c->tls = NULL;
+  c->is_tls = c->is_tls_hs = 0;
 }
 
 size_t mg_tls_pending(struct mg_connection *c) {
